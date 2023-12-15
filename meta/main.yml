@@ -1,0 +1,22 @@
+galaxy_info:
+  role_name: cilium
+  author: Luka Petrovic
+  # namespace:
+  description: Ansible role to install/upgrade/downgrade/change Cillium (config) on k8s cluster.
+
+  license: GPLv3
+
+  min_ansible_version: 2.10.0
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - focal
+    - jammy
+
+  galaxy_tags:
+    - kubernetes
+    - k8s
+    - cilium
+
+dependencies: []

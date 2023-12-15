@@ -1,0 +1,73 @@
+---
+{% if cilium_kube_proxy_replacement != None %}
+kubeProxyReplacement: {{ cilium_kube_proxy_replacement }}
+{% endif %}
+{% if cilium_kube_proxy_healtz_address != None %}
+kubeProxyReplacementHealthzBindAddr: {{ cilium_kube_proxy_healtz_address }}
+{% endif %}
+
+{% if cilium_operator_configuration != None %}
+{{ cilium_operator_configuration | to_nice_yaml }}
+{% endif %}
+
+k8sServiceHost: {{ cilium_k8s_service_host }}
+k8sServicePort: {{ cilium_k8s_service_port }}
+
+{% if cilium_ipam_configuration != None %}
+{{ cilium_ipam_configuration | to_nice_yaml }}
+{% endif %}
+
+{% if cilium_bpf_configuration != None %}
+{{ cilium_bpf_configuration | to_nice_yaml }}
+{% endif %}
+
+ipv4:
+  enabled: {{ cilium_enable_ipv4 }}
+ipv6:
+  enabled: {{ cilium_enable_ipv6 }}
+
+routingMode: {{ cilium_routing_mode }}
+{% if cilium_routing_mode == 'native' %}
+tunnelProtocol: ''
+{% elif cilium_routing_mode != 'native' and cilium_tunnel_protocol is defined %}
+tunnelProtocol: {{ cilium_tunnel_protocol }}
+{% endif %}
+
+enableIPv4Masquerade: {{ cilium_enable_ipv4_masq }}
+enableIPv6Masquerade: {{ cilium_enable_ipv6_masq }}
+
+{% if cilium_routing_mode == 'native' and cilium_ipv4_native_cidr != None %}
+ipv4NativeRoutingCIDR: {{ cilium_ipv4_native_cidr }}
+{% endif %}
+{% if cilium_routing_mode == 'native' and cilium_ipv6_native_cidr != None %}
+ipv6NativeRoutingCIDR: {{ cilium_ipv6_native_cidr }}
+{% endif %}
+{% if cilium_autodirect_node_routes != None %}
+autoDirectNodeRoutes: {{ cilium_autodirect_node_routes }}
+{% endif %}
+
+{% if cilium_load_balancer_config != None %}
+{{ cilium_load_balancer_config | to_nice_yaml }}
+{% endif %}
+
+{% if cilium_maglev_config != None %}
+{{ cilium_maglev_config | to_nice_yaml }}
+{% endif %}
+
+l7Proxy: {{ cilium_l7_proxy }}
+
+{% if cilium_bgp_control_plane_config != None %}
+{{ cilium_bgp_control_plane_config | to_nice_yaml }}
+{% endif %}
+
+{% if cilium_ingress_controler_config != None %}
+{{ cilium_ingress_controler_config | to_nice_yaml }}
+{% endif %}
+
+{% if cilium_gateway_api_config != None %}
+{{ cilium_gateway_api_config | to_nice_yaml }}
+{% endif %}
+
+{% if cilium_additional_options != None %}
+{{ cilium_additional_options | to_nice_yaml }}
+{% endif %}
