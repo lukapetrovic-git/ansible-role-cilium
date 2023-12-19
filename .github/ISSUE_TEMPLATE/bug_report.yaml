@@ -67,7 +67,6 @@ body:
     label: Actual Results
     description: >-
       Describe the actual result.
-    render: console
     placeholder: >-
       For example, paste Ansible Output here.
   validations:

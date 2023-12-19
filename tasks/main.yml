@@ -71,14 +71,14 @@
   register: cilium_install
   when: '"Unable to obtain cilium version, no cilium pods found in namespace" in cilium_running_version.stdout'
 
-- name: upgrade/downgrade cilium
+- name: upgrade/downgrade cilium or change cilium config
   ansible.builtin.shell:
     cmd: "{{ cilium_cli_bin_path }} upgrade --version {{ cilium_version }} -f {{ cilium_config_file_path }}"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
   register: cilium_upgrade
   when:
-  - cilium_version not in cilium_running_version.stdout
+  - cilium_version not in cilium_running_version.stdout or cilium_config.changed
   - cilium_install.changed == false
 
 - name: restart cilium
