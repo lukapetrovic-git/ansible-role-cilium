@@ -113,44 +113,35 @@ cilium_enable_ipv6_masq: false
 #   acceleration: disabled
 
 # (optional) Configure maglev consistent hashing
-# Will be excluded from config if left blank (None)
 # https://docs.cilium.io/en/stable/network/kubernetes/kubeproxy-free/#maglev-consistent-hashing
-cilium_maglev_config:
-  # maglev:
-  #   tableSize: 16381
-  #   hashSeed: flGITJblThc3dnNy
+# cilium_maglev_config:
+#   tableSize: 65521
+#   hashSeed: flGITJblThc3dnNy
 
 # Enable Layer 7 network policy.
 cilium_l7_proxy: true
 
 # (optional) This feature set enables virtual BGP routers to be created via CiliumBGPPeeringPolicy CRDs.
-# Will be excluded from config if left blank (None)
-cilium_bgp_control_plane_config:
-  # bgpControlPlane:
-  #   enabled: true
+# cilium_bgp_control_plane_config:
+#   enabled: true
 
 # (optional) Enable cilium ingress controller
 # This will automatically set enable-envoy-config as well.
-# Will be excluded from config if left blank (None)
-cilium_ingress_controler_config:
-  # ingressController:
-  #   default: true
-  #   enabled: true
-  #   loadbalancerMode: dedicated
-  #   ingressLBAnnotationPrefixes:
-  #     - service.kubernetes.io
-  #     - service.beta.kubernetes.io
-  #     - io.cilium
+# cilium_ingress_controler_config:
+#   default: true
+#   enabled: true
+#   loadbalancerMode: dedicated
+#   ingressLBAnnotationPrefixes:
+#     - service.kubernetes.io
+#     - service.beta.kubernetes.io
+#     - io.cilium
 
 # Enable support for Gateway API in cilium
 # This will automatically set enable-envoy-config as well.
 # additional CRDs need to be installed to enable gateway API
 # https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/
-# Will be excluded from config if left blank (None)
-cilium_gateway_api_config:
-  # gatewayAPI:
-  #   enabled: false
+# cilium_gateway_api_config:
+#   enabled: true
 
 # Additional options to pass to cilium config in yaml format
-# Will be excluded from config if left blank (None)
-cilium_additional_options:
+# cilium_additional_options:
