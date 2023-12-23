@@ -43,7 +43,6 @@ cilium_k8s_service_port: "6443"
 
 # (optional) Configure IP Address Management mode.
 # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
-# Will be excluded from config if left blank (None)
 # cilium_ipam_configuration:
 #   ipam:
 #     mode: cluster-pool
@@ -54,11 +53,9 @@ cilium_k8s_service_port: "6443"
 #       clusterPoolIPv4MaskSize: 24
 
 # (optional) BPF related configuration
-# Will be excluded from config if left blank (None)
-cilium_bpf_configuration:
-  # bpf:
-  #   masquerade: true
-  #   lbMapMax: 65536
+# cilium_bpf_configuration:
+#   masquerade: true
+#   lbMapMax: 65536
 
 # Enable IPv4 support.
 cilium_enable_ipv4: true
@@ -96,29 +93,24 @@ cilium_enable_ipv6_masq: false
 # direct routing and the Kubernetes CIDR is included in the native routing CIDR,
 # the user must configure the routes to reach pods, either manually or by
 # setting the auto-direct-node-routes flag.
-# Will be excluded from config if left blank (None)
-cilium_ipv4_native_cidr:
+# cilium_ipv4_native_cidr:
 
 # (optional) Same as above but for IPv6
-# Will be excluded from config if left blank (None)
-cilium_ipv6_native_cidr:
+# cilium_ipv6_native_cidr:
 
 # (optional) Enable installation of PodCIDR routes between worker
 # nodes if worker nodes share a common L2 network segment.
-# Will be excluded from config if left blank (None)
 # Possible values:
 #   - true
 #   - false
-cilium_autodirect_node_routes:
+# cilium_autodirect_node_routes:
 
 # (optional) Configure service load balancing
-# Will be excluded from config if left blank (None)
-cilium_load_balancer_config:
-  # loadBalancer:
-  #   algorithm: maglev
-  #   mode: dsr
-  #   dsrDispatch: geneve
-  #   acceleration: disabled
+# cilium_load_balancer_config:
+#   algorithm: maglev
+#   mode: dsr
+#   dsrDispatch: geneve
+#   acceleration: disabled
 
 # (optional) Configure maglev consistent hashing
 # Will be excluded from config if left blank (None)

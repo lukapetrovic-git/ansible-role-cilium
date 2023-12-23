@@ -15,8 +15,8 @@ k8sServicePort: {{ cilium_k8s_service_port }}
 ipam: {{ cilium_ipam_configuration }}
 {% endif %}
 
-{% if cilium_bpf_configuration != None %}
-{{ cilium_bpf_configuration | to_nice_yaml }}
+{% if cilium_bpf_configuration is defined %}
+bpf: {{ cilium_bpf_configuration }}
 {% endif %}
 
 ipv4:
@@ -27,25 +27,25 @@ ipv6:
 routingMode: {{ cilium_routing_mode }}
 {% if cilium_routing_mode == 'native' %}
 tunnelProtocol: ''
-{% elif cilium_routing_mode != 'native' and cilium_tunnel_protocol is defined %}
+{% elif cilium_routing_mode != 'native' %}
 tunnelProtocol: {{ cilium_tunnel_protocol }}
 {% endif %}
 
 enableIPv4Masquerade: {{ cilium_enable_ipv4_masq }}
 enableIPv6Masquerade: {{ cilium_enable_ipv6_masq }}
 
-{% if cilium_routing_mode == 'native' and cilium_ipv4_native_cidr != None %}
+{% if cilium_routing_mode == 'native' and cilium_ipv4_native_cidr is defined %}
 ipv4NativeRoutingCIDR: {{ cilium_ipv4_native_cidr }}
 {% endif %}
-{% if cilium_routing_mode == 'native' and cilium_ipv6_native_cidr != None %}
+{% if cilium_routing_mode == 'native' and cilium_ipv6_native_cidr is defined %}
 ipv6NativeRoutingCIDR: {{ cilium_ipv6_native_cidr }}
 {% endif %}
-{% if cilium_autodirect_node_routes != None %}
+{% if cilium_autodirect_node_routes is defined %}
 autoDirectNodeRoutes: {{ cilium_autodirect_node_routes }}
 {% endif %}
 
-{% if cilium_load_balancer_config != None %}
-{{ cilium_load_balancer_config | to_nice_yaml }}
+{% if cilium_load_balancer_config is defined %}
+loadBalancer: {{ cilium_load_balancer_config }}
 {% endif %}
 
 {% if cilium_maglev_config != None %}
