@@ -44,7 +44,6 @@ cilium_k8s_service_port: "6443"
 # (optional) Configure IP Address Management mode.
 # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
 # cilium_ipam_configuration:
-#   ipam:
 #     mode: cluster-pool
 #     operator:
 #       clusterPoolIPv4PodCIDRList:
