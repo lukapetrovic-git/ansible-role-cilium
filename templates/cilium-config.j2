@@ -66,6 +66,10 @@ ingressController: {{ cilium_ingress_controler_config }}
 gatewayAPI: {{ cilium_gateway_api_config }}
 {% endif %}
 
+{% if cilium_encryption_config is defined %}
+encryption: {{ cilium_encryption_config }}
+{% endif %}
+
 {% if cilium_additional_options is defined %}
 {{ cilium_additional_options | to_nice_yaml }}
 {% endif %}
