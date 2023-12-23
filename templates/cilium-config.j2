@@ -1,20 +1,18 @@
 ---
-{% if cilium_kube_proxy_replacement != None %}
 kubeProxyReplacement: {{ cilium_kube_proxy_replacement }}
-{% endif %}
-{% if cilium_kube_proxy_healtz_address != None %}
+{% if cilium_kube_proxy_healtz_address is defined %}
 kubeProxyReplacementHealthzBindAddr: {{ cilium_kube_proxy_healtz_address }}
 {% endif %}
 
-{% if cilium_operator_configuration != None %}
-{{ cilium_operator_configuration | to_nice_yaml }}
+{% if cilium_operator_configuration is defined %}
+operator: {{ cilium_operator_configuration }}
 {% endif %}
 
 k8sServiceHost: {{ cilium_k8s_service_host }}
 k8sServicePort: {{ cilium_k8s_service_port }}
 
-{% if cilium_ipam_configuration != None %}
-{{ cilium_ipam_configuration | to_nice_yaml }}
+{% if cilium_ipam_configuration is defined %}
+ipam: {{ cilium_ipam_configuration }}
 {% endif %}
 
 {% if cilium_bpf_configuration != None %}

@@ -19,23 +19,21 @@ cilium_kubeconfig_path: ~/.kube/config
 
 # Cilium specific config
 
-# (optional) Configure the kube-proxy replacement in Cilium BPF datapath
+# Configure the kube-proxy replacement in Cilium BPF datapath
 # Valid options are "true", "false".
 # ref: https://docs.cilium.io/en/stable/network/kubernetes/kubeproxy-free/
-# Will be excluded from config if left blank (None)
-cilium_kube_proxy_replacement: true
+cilium_kube_proxy_replacement: false
 
 # (optional) Healthz server bind address for the kube-proxy replacement.
 # To enable set the value to '0.0.0.0:10256' for all ipv4
 # addresses and this '[::]:10256' for all ipv6 addresses.
-# Will be excluded from config if left blank (None)
-cilium_kube_proxy_healtz_address: 0.0.0.0:10256
+# cilium_kube_proxy_healtz_address: 0.0.0.0:10256
 
 # (optional) Cilium Operator configuration
-# Will be excluded from config if left blank (None)
-cilium_operator_configuration:
-  # operator:
-  #   replicas: 2
+# cilium_operator_configuration:
+#   enabled: true
+#   replicas: 2
+#   priorityClassName: "high-priority"
 
 # (string) Kubernetes service host
 cilium_k8s_service_host: ''
@@ -46,16 +44,16 @@ cilium_k8s_service_port: "6443"
 # (optional) Configure IP Address Management mode.
 # ref: https://docs.cilium.io/en/stable/network/concepts/ipam/
 # Will be excluded from config if left blank (None)
-cilium_ipam_configuration:
-  # ipam:
-  #   mode: cluster-pool
-  #   operator:
-  #     clusterPoolIPv4PodCIDRList:
-  #       - 10.10.0.0/16
-  #       - 172.20.0.0/16
-  #     clusterPoolIPv4MaskSize: 24
+# cilium_ipam_configuration:
+#   ipam:
+#     mode: cluster-pool
+#     operator:
+#       clusterPoolIPv4PodCIDRList:
+#         - 10.10.0.0/16
+#         - 172.20.0.0/16
+#       clusterPoolIPv4MaskSize: 24
 
-# (optional) BPF related configuration 
+# (optional) BPF related configuration
 # Will be excluded from config if left blank (None)
 cilium_bpf_configuration:
   # bpf:
