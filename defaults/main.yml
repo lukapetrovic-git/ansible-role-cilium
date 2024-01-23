@@ -152,5 +152,13 @@ cilium_l7_proxy: true
 #   # This option is only effective when encryption.type is set to "wireguard".
 #   nodeEncryption: true
 
+# (optional) Configure the eBPF-based ip-masq-agent
+# cilium_ip_masq_agent_config:
+#   enabled: false
+#   config:
+#     nonMasqueradeCIDRs: []
+#     masqLinkLocal: false
+#     masqLinkLocalIPv6: false
+
 # (optional) Additional options to pass to cilium config in yaml format
 # cilium_additional_options:
