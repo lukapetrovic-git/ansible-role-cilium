@@ -69,7 +69,7 @@
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
   register: cilium_install
-  when: '"Unable to obtain cilium version, no cilium pods found in namespace" in cilium_running_version.stdout'
+  when: '"Unable to obtain cilium version" in cilium_running_version.stdout'
 
 - name: upgrade/downgrade cilium or change cilium config
   ansible.builtin.shell:
