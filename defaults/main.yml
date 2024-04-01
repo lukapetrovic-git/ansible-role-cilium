@@ -160,5 +160,15 @@ cilium_l7_proxy: true
 #     masqLinkLocal: false
 #     masqLinkLocalIPv6: false
 
+# (optional) Configure Hubble
+# cilium_hubble_config:
+#   enabled: true
+#   socketPath: /var/run/cilium/hubble.sock
+#   listenAddress: ":4244"
+#   relay:
+#     enabled: true
+#   ui:
+#     enabled: true
+
 # (optional) Additional options to pass to cilium config in yaml format
 # cilium_additional_options:
