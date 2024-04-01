@@ -74,6 +74,10 @@ encryption: {{ cilium_encryption_config }}
 ipMasqAgent: {{ cilium_ip_masq_agent_config }}
 {% endif %}
 
+{% if cilium_hubble_config is defined %}
+hubble: {{ cilium_hubble_config }}
+{% endif %}
+
 {% if cilium_additional_options is defined %}
 {{ cilium_additional_options | to_nice_yaml }}
 {% endif %}
