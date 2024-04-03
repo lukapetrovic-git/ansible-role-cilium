@@ -1,0 +1,45 @@
+- block:
+    - name: determine latest hubble cli version
+      ansible.builtin.uri:
+        url: https://raw.githubusercontent.com/cilium/hubble/main/stable.txt
+        return_content: true
+      register: cilium_hubble_latest_version
+
+    - name: set hubble desired version variable
+      ansible.builtin.set_fact:
+        cilium_hubble_cli_version: "{{ cilium_hubble_latest_version.content | trim }}"
+  when: cilium_hubble_cli_version is not defined or cilium_hubble_cli_version == None
+
+- name: check if hubble cli binary exists
+  ansible.builtin.stat:
+    path: "{{ cilium_hubble_cli_bin_path }}"
+  register: cilium_hubble_cli_check
+
+- name: check hubble cli version
+  ansible.builtin.shell:
+    cmd: "{{ cilium_hubble_cli_bin_path }} version"
+  failed_when: false
+  changed_when: false
+  register: cilium_hubble_cli_existing_version
+
+- block:
+    - name: set hubble cli architecture var
+      ansible.builtin.set_fact:
+        cilium_hubble_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
+
+    - name: download hubble cli
+      ansible.builtin.unarchive:
+        src: "https://github.com/cilium/hubble/releases/download/{{ cilium_hubble_cli_version }}/hubble-linux-{{ cilium_hubble_arch }}.tar.gz"
+        dest: /tmp
+        remote_src: true
+        mode: 0755
+
+    - name: copy hubble cli binary into place.
+      ansible.builtin.copy:
+        src: "/tmp/hubble"
+        dest: "{{ cilium_hubble_cli_bin_path }}"
+        mode: 0755
+        remote_src: true
+      become: true
+  when: cilium_hubble_cli_check.stat.exists == false or cilium_hubble_cli_version[1:] not in cilium_hubble_cli_existing_version.stdout
+

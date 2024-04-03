@@ -5,7 +5,7 @@ cilium_config_file_path: "/home/{{ ansible_user }}/cilium-config.yml"
 cilium_version: '1.14.3'
 
 # Cilium CLI version to be installed/upgraded/downgraded
-# If left blank that latest version of Cilium CLI will be determined and installed
+# If left blank latest version of Cilium CLI will be determined and installed
 cilium_cli_version:
 
 # Cilium CLI binary path
@@ -172,3 +172,14 @@ cilium_l7_proxy: true
 
 # (optional) Additional options to pass to cilium config in yaml format
 # cilium_additional_options:
+
+# Install Hubble cli
+cilium_install_hubble_cli: true
+
+# Hubble CLI version to be installed/upgraded/downgraded
+# If left blank latest version of Hubble CLI will be determined and installed
+# For example v0.13.0
+cilium_hubble_cli_version:
+
+# Hubble CLI binary path
+cilium_hubble_cli_bin_path: /usr/local/bin/hubble
