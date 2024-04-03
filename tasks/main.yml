@@ -96,3 +96,8 @@
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
   when: cilium_install.changed or cilium_upgrade.changed or cilium_restart.changed
+
+- name: install hubble cli
+  ansible.builtin.include_tasks:
+    file: tasks/hubble_cli.yml
+  when: cilium_install_hubble_cli | bool
