@@ -36,7 +36,6 @@
         dest: /tmp
         remote_src: true
         mode: 0755
-      register: cilium_download
 
     - name: copy cilium binary into place.
       ansible.builtin.copy:
@@ -45,7 +44,6 @@
         mode: 0755
         remote_src: true
       become: true
-      when: cilium_download.changed
   when: cilium_check.stat.exists == false or cilium_cli_version not in cilium_cli_existing_version.stdout
 
 - name: create cilium config

@@ -33,7 +33,6 @@
         dest: /tmp
         remote_src: true
         mode: 0755
-      register: cilium_hubble_download
 
     - name: copy hubble cli binary into place.
       ansible.builtin.copy:
@@ -42,6 +41,5 @@
         mode: 0755
         remote_src: true
       become: true
-      when: cilium_hubble_download.changed
   when: cilium_hubble_cli_check.stat.exists == false or cilium_hubble_cli_version not in cilium_hubble_cli_existing_version.stdout
 
