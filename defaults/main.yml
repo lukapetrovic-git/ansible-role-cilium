@@ -178,6 +178,7 @@ cilium_install_hubble_cli: true
 
 # Hubble CLI version to be installed/upgraded/downgraded
 # If left blank latest version of Hubble CLI will be determined and installed
+# For example v0.13.0
 cilium_hubble_cli_version:
 
 # Hubble CLI binary path
