@@ -99,19 +99,9 @@
         KUBECONFIG: "{{ cilium_kubeconfig_path }}"
       when: cilium_install.changed or cilium_upgrade.changed or cilium_restart.changed
   rescue:
-    - name: restart cilium
-      ansible.builtin.shell: |
-        {{ cilium_kubectl_bin_path }} -n kube-system rollout restart deployment/cilium-operator
-        {{ cilium_kubectl_bin_path }} -n kube-system rollout restart daemonset/cilium
-      environment:
-        KUBECONFIG: "{{ cilium_kubeconfig_path }}"
-
-    - name: wait for cilium to be running and ready 2
-      ansible.builtin.shell:
-        cmd: "{{ cilium_cli_bin_path }} status --wait"
-      environment:
-        KUBECONFIG: "{{ cilium_kubeconfig_path }}"
-  retries: 3
+    - name: attempt another cilium restart
+      ansible.builtin.include_tasks:
+        file: tasks/restart_cilium.yml
 
 - name: install hubble cli
   ansible.builtin.include_tasks:
