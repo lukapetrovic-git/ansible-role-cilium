@@ -91,7 +91,7 @@
     - cilium_config.changed
     - cilium_install.changed == false
 
-  block:
+- block:
     - name: wait for cilium to be running and ready
       ansible.builtin.shell:
         cmd: "{{ cilium_cli_bin_path }} status --wait"
