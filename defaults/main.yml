@@ -2,7 +2,7 @@
 cilium_config_file_path: "/home/{{ ansible_user }}/cilium-config.yml"
 
 # Cilium version to be installed/upgraded/downgraded
-cilium_version: '1.14.3'
+cilium_version: "1.14.3"
 
 # Cilium CLI version to be installed/upgraded/downgraded
 # If left blank latest version of Cilium CLI will be determined and installed
@@ -16,6 +16,9 @@ cilium_kubectl_bin_path: kubectl
 
 # Kubectl config path
 cilium_kubeconfig_path: ~/.kube/config
+
+# Restart cilium operator and agents on config change
+cilium_restart_on_config_change: false
 
 # Cilium specific config
 
@@ -36,7 +39,7 @@ cilium_kube_proxy_replacement: false
 #   priorityClassName: "high-priority"
 
 # (string) Kubernetes service host
-cilium_k8s_service_host: ''
+cilium_k8s_service_host: ""
 
 # (string) Kubernetes service port
 cilium_k8s_service_port: "6443"
@@ -170,9 +173,6 @@ cilium_l7_proxy: true
 #   ui:
 #     enabled: true
 
-# (optional) Additional options to pass to cilium config in yaml format
-# cilium_additional_options:
-
 # Install Hubble cli
 cilium_install_hubble_cli: true
 
@@ -183,3 +183,16 @@ cilium_hubble_cli_version:
 
 # Hubble CLI binary path
 cilium_hubble_cli_bin_path: /usr/local/bin/hubble
+
+# Roll out cilium agent pods automatically when configmap is updated.
+cilium_rollout_pods_on_update: false
+
+# (optional) Cilium agent update strategy
+# cilium_update_strategy:
+#   updateStrategy:
+#     type: RollingUpdate
+#     rollingUpdate:
+#       maxUnavailable: 2
+
+# (optional) Additional options to pass to cilium config in yaml format
+# cilium_additional_options:

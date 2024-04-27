@@ -88,13 +88,14 @@
   when:
   - cilium_config.changed
   - cilium_install.changed == false
+  - cilium_restart_on_config_change | bool
 
 - name: wait for cilium to be running and ready
   ansible.builtin.shell:
-    cmd: "{{ cilium_cli_bin_path }} status --wait"
+    cmd: "{{ cilium_cli_bin_path }} status --wait --wait-duration 10m"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
-  when: cilium_install.changed or cilium_upgrade.changed or cilium_restart.changed
+  when: cilium_install.changed or cilium_upgrade.changed
 
 - name: install hubble cli
   ansible.builtin.include_tasks:
