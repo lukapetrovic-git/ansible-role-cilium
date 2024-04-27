@@ -78,6 +78,12 @@ ipMasqAgent: {{ cilium_ip_masq_agent_config }}
 hubble: {{ cilium_hubble_config }}
 {% endif %}
 
+rollOutCiliumPods: {{ cilium_rollout_pods_on_update }}
+
+{% if cilium_update_strategy is defined %}
+updateStrategy: {{ cilium_update_strategy }}
+{% endif %}
+
 {% if cilium_additional_options is defined %}
 {{ cilium_additional_options | to_nice_yaml }}
 {% endif %}
