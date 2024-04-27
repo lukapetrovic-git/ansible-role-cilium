@@ -86,7 +86,7 @@
     {{ cilium_kubectl_bin_path }} --kubeconfig {{ cilium_kubeconfig_path }} -n kube-system rollout restart daemonset/cilium
   register: cilium_restart
   when:
-  - cilium_upgrade.changed
+  - cilium_config.changed
   - cilium_install.changed == false
   - cilium_restart_on_config_change | bool
 
