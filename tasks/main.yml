@@ -80,21 +80,21 @@
   - cilium_version not in cilium_running_version.stdout or cilium_config.changed
   - cilium_install.changed == false
 
-- name: restart cilium
-  ansible.builtin.shell: |
-    {{ cilium_kubectl_bin_path }} --kubeconfig {{ cilium_kubeconfig_path }} -n kube-system rollout restart deployment/cilium-operator
-    {{ cilium_kubectl_bin_path }} --kubeconfig {{ cilium_kubeconfig_path }} -n kube-system rollout restart daemonset/cilium
-  register: cilium_restart
-  when:
-  - cilium_config.changed
-  - cilium_install.changed == false
+# - name: restart cilium
+#   ansible.builtin.shell: |
+#     {{ cilium_kubectl_bin_path }} --kubeconfig {{ cilium_kubeconfig_path }} -n kube-system rollout restart deployment/cilium-operator
+#     {{ cilium_kubectl_bin_path }} --kubeconfig {{ cilium_kubeconfig_path }} -n kube-system rollout restart daemonset/cilium
+#   register: cilium_restart
+#   when:
+#   - cilium_config.changed
+#   - cilium_install.changed == false
 
 - name: wait for cilium to be running and ready
   ansible.builtin.shell:
     cmd: "{{ cilium_cli_bin_path }} status --wait"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
-  when: cilium_install.changed or cilium_upgrade.changed or cilium_restart.changed
+  when: cilium_install.changed or cilium_upgrade.changed # or cilium_restart.changed
 
 - name: install hubble cli
   ansible.builtin.include_tasks:
