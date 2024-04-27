@@ -92,7 +92,7 @@
 
 - name: wait for cilium to be running and ready
   ansible.builtin.shell:
-    cmd: "{{ cilium_cli_bin_path }} status --wait"
+    cmd: "{{ cilium_cli_bin_path }} status --wait --wait-duration 10m"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
   when: cilium_install.changed or cilium_upgrade.changed
