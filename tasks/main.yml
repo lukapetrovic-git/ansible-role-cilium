@@ -94,7 +94,7 @@
 - block:
     - name: wait for cilium to be running and ready
       ansible.builtin.shell:
-        cmd: "{{ cilium_cli_bin_path }} status --wait"
+        cmd: "{{ cilium_cli_bin_path }} status --wait --wait-duration 5m"
       environment:
         KUBECONFIG: "{{ cilium_kubeconfig_path }}"
       when: cilium_install.changed or cilium_upgrade.changed or cilium_restart.changed
@@ -102,6 +102,8 @@
     - name: attempt another cilium restart
       ansible.builtin.include_tasks:
         file: tasks/restart_cilium.yml
+
+# check if 2 or more cilium agents pods are not running, if yes error out
 
 - name: install hubble cli
   ansible.builtin.include_tasks:
