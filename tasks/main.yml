@@ -65,6 +65,7 @@
 - name: determine gateway api crd urls based on desired version
   ansible.builtin.include_vars:
     file: vars/{{ cilium_gw_api_crds_version }}_gw_api_crds.yaml
+  when: cilium_install_gw_api_crds | bool
 
 - name: install gateway api crds
   ansible.builtin.shell:
