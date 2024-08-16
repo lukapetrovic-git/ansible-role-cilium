@@ -196,3 +196,15 @@ cilium_rollout_pods_on_update: false
 
 # (optional) Additional options to pass to cilium config in yaml format
 # cilium_additional_options:
+
+# Install required Gateway Api CRDS
+# https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/
+cilium_install_gw_api_crds: false
+
+# Gateway API CRDs version to install
+# Required when cilium_install_gw_api_crds is set to true
+# cilium 1.13.x - 0.5.1
+# cilium 1.14.x - 0.7.0
+# cilium 1.15.x - 1.0.0
+# cilium 1.16.x - 1.1.0
+# cilium_gw_api_crds_version: 1.0.0

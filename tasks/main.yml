@@ -50,7 +50,7 @@
   ansible.builtin.template:
     src: "cilium-config.j2"
     dest: "{{ cilium_config_file_path }}"
-    mode: '0600'
+    mode: "0600"
   register: cilium_config
 
 - name: check cilium version
@@ -61,6 +61,18 @@
   failed_when: false
   changed_when: false
   register: cilium_running_version
+
+- name: determine gateway api crd urls based on desired version
+  ansible.builtin.include_vars:
+    file: vars/{{ cilium_gw_api_crds_version }}_gw_api_crds.yaml
+
+- name: install gateway api crds
+  ansible.builtin.shell:
+    cmd: "{{ cilium_kubectl_bin_path }} apply -f {{ item }}"
+  environment:
+    KUBECONFIG: "{{ cilium_kubeconfig_path }}"
+  loop: "{{ cilium_gw_api_crds }}"
+  when: cilium_install_gw_api_crds | bool
 
 - name: install cilium
   ansible.builtin.shell:
@@ -77,18 +89,20 @@
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
   register: cilium_upgrade
   when:
-  - cilium_version not in cilium_running_version.stdout or cilium_config.changed
-  - cilium_install.changed == false
+    - cilium_version not in cilium_running_version.stdout or cilium_config.changed
+    - cilium_install.changed == false
 
 - name: restart cilium
   ansible.builtin.shell: |
-    {{ cilium_kubectl_bin_path }} --kubeconfig {{ cilium_kubeconfig_path }} -n kube-system rollout restart deployment/cilium-operator
-    {{ cilium_kubectl_bin_path }} --kubeconfig {{ cilium_kubeconfig_path }} -n kube-system rollout restart daemonset/cilium
+    {{ cilium_kubectl_bin_path }} -n kube-system rollout restart deployment/cilium-operator
+    {{ cilium_kubectl_bin_path }} -n kube-system rollout restart daemonset/cilium
+  environment:
+    KUBECONFIG: "{{ cilium_kubeconfig_path }}"
   register: cilium_restart
   when:
-  - cilium_config.changed
-  - cilium_install.changed == false
-  - cilium_restart_on_config_change | bool
+    - cilium_config.changed
+    - cilium_install.changed == false
+    - cilium_restart_on_config_change | bool
 
 - name: wait for cilium to be running and ready
   ansible.builtin.shell:
