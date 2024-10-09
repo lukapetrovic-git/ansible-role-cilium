@@ -100,6 +100,7 @@
     {{ cilium_kubectl_bin_path }} -n kube-system rollout restart daemonset/cilium
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
+  changed_when: false
   register: cilium_restart
   when:
     - cilium_config.changed
@@ -110,6 +111,7 @@
   ansible.builtin.command: "{{ cilium_cli_bin_path }} status --wait --wait-duration 10m"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
+  changed_when: false
   when: cilium_install.changed or cilium_upgrade.changed
 
 - name: Install Hubble CLI
