@@ -1,3 +1,4 @@
+---
 # Path on the master node where to save Cilium config that gets passed to Cilium CLI on install/config change
 cilium_config_file_path: "/home/{{ ansible_user }}/cilium-config.yml"
 
@@ -200,7 +201,6 @@ cilium_rollout_pods_on_update: false
 # Install required Gateway Api CRDS
 # https://docs.cilium.io/en/stable/network/servicemesh/gateway-api/gateway-api/
 cilium_install_gw_api_crds: false
-
 # Gateway API CRDs version to install
 # Required when cilium_install_gw_api_crds is set to true
 # cilium 1.13.x - 0.5.1
