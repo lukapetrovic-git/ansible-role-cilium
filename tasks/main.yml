@@ -20,7 +20,7 @@
 - name: Check Cilium CLI version
   ansible.builtin.shell: |
     set -o pipefail
-    "{{ cilium_cli_bin_path }} version | grep cilium-cli:"
+    {{ cilium_cli_bin_path }} version | grep cilium-cli:
   args:
     executable: /bin/bash
   environment:
@@ -61,7 +61,7 @@
 - name: Check Cilium version
   ansible.builtin.shell: |
     set -o pipefail
-    "{{ cilium_cli_bin_path }} version | grep 'cilium image (running):'"
+    {{ cilium_cli_bin_path }} version | grep 'cilium image (running):'
   args:
     executable: /bin/bash
   environment:
