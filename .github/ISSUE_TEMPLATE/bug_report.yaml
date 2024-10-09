@@ -2,72 +2,72 @@
 name: Bug report
 description: Report a bug!
 title: "[BUG]: "
-labels: ['bug']
+labels: ["bug"]
 
 body:
-- type: markdown
-  attributes:
-    value: >
-      **Report a bug you found/experienced!**
+  - type: markdown
+    attributes:
+      value: >
+        **Report a bug you found/experienced!**
 
-      Please first check if the issue exists in the Issues tab.
+        Please first check if the issue exists in the Issues tab.
 
-- type: textarea
-  attributes:
-    label: Summary
-    description: Write a brief explanation of the problem.
-    placeholder: >-
-      When running role xyz with variables xyz, xyz breaks...
-  validations:
-    required: true
+  - type: textarea
+    attributes:
+      label: Summary
+      description: Write a brief explanation of the problem.
+      placeholder: >-
+        When running role xyz with variables xyz, xyz breaks...
+    validations:
+      required: true
 
-- type: textarea
-  attributes:
-    label: Ansible Version
-    description: >-
-      Paste verbatim output from `ansible --version` below.
-    render: console
-    placeholder: >-
-      ansible [core 2.15.8]
-        config file = /etc/ansible/ansible.cfg
-        configured module search path = ['/home/user/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
-        ansible python module location = /usr/lib/python3/dist-packages/ansible
-        ansible collection location = /home/user/.ansible/collections:/usr/share/ansible/collections
-        executable location = /usr/bin/ansible
-        python version = 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] (/usr/bin/python3)
-        jinja version = 3.0.3
-        libyaml = True
-  validations:
-    required: true
+  - type: textarea
+    attributes:
+      label: Ansible Version
+      description: >-
+        Paste verbatim output from `ansible --version` below.
+      render: console
+      placeholder: >-
+        ansible [core 2.15.8]
+          config file = /etc/ansible/ansible.cfg
+          configured module search path = ['/home/user/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+          ansible python module location = /usr/lib/python3/dist-packages/ansible
+          ansible collection location = /home/user/.ansible/collections:/usr/share/ansible/collections
+          executable location = /usr/bin/ansible
+          python version = 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] (/usr/bin/python3)
+          jinja version = 3.0.3
+          libyaml = True
+    validations:
+      required: true
 
-- type: textarea
-  attributes:
-    label: Repro Steps
-    description: >-
-      Describe steps to reproduce the problem.
+  - type: textarea
+    attributes:
+      label: Repro Steps
+      description: >-
+        Describe steps to reproduce the problem.
 
-      **HINT:** You can paste https://gist.github.com links for larger files.
-    value: |
-      Paste an example playbook/vars file below
-  validations:
-    required: true
+        **HINT:** You can paste https://gist.github.com links for larger files.
+      value: |
+        Paste an example playbook/vars file below
+    validations:
+      required: true
 
-- type: textarea
-  attributes:
-    label: Expected Results
-    description: >-
-      Describe the expected result of running the steps above.
-    placeholder: >-
-      When I ran X, assuming Y I expected Z to happen.
-  validations:
-    required: true
+  - type: textarea
+    attributes:
+      label: Expected Results
+      description: >-
+        Describe the expected result of running the steps above.
+      placeholder: >-
+        When I ran X, assuming Y I expected Z to happen.
+    validations:
+      required: true
 
-- type: textarea
-  attributes:
-    label: Actual Results
-    description: >-
-      Describe the actual result.
-    placeholder: >-
-      For example, paste Ansible Output here.
-  validations:
-    required: true
+  - type: textarea
+    attributes:
+      label: Actual Results
+      description: >-
+        Describe the actual result.
+      placeholder: >-
+        For example, paste Ansible Output here.
+    validations:
+      required: true
