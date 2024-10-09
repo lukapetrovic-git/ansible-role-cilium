@@ -79,6 +79,7 @@
   ansible.builtin.command: "{{ cilium_kubectl_bin_path }} apply -f {{ item }}"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
+  changed_when: true
   loop: "{{ cilium_gw_api_crds }}"
   when: cilium_install_gw_api_crds | bool
 
@@ -86,6 +87,7 @@
   ansible.builtin.command: "{{ cilium_cli_bin_path }} install --version {{ cilium_version }} -f {{ cilium_config_file_path }}"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
+  changed_when: true
   register: cilium_install
   when: '"Unable to obtain cilium version" in cilium_running_version.stdout'
 
@@ -93,6 +95,7 @@
   ansible.builtin.command: "{{ cilium_cli_bin_path }} upgrade --version {{ cilium_version }} -f {{ cilium_config_file_path }}"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
+  changed_when: true
   register: cilium_upgrade
   when:
     - cilium_version not in cilium_running_version.stdout or cilium_config.changed
@@ -104,7 +107,7 @@
     {{ cilium_kubectl_bin_path }} -n kube-system rollout restart daemonset/cilium
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
-  changed_when: false
+  changed_when: true
   register: cilium_restart
   when:
     - cilium_config.changed
@@ -115,7 +118,7 @@
   ansible.builtin.command: "{{ cilium_cli_bin_path }} status --wait --wait-duration 10m"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
-  changed_when: false
+  changed_when: true
   when: cilium_install.changed or cilium_upgrade.changed
 
 - name: Install Hubble CLI
