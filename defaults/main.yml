@@ -21,6 +21,9 @@ cilium_kubeconfig_path: ~/.kube/config
 # Restart cilium operator and agents on config change
 cilium_restart_on_config_change: false
 
+# Duration to wait for cilium status to report success
+cilium_status_wait_duration: 10m
+
 # Cilium specific config
 
 # Configure the kube-proxy replacement in Cilium BPF datapath

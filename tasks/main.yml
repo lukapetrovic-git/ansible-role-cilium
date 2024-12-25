@@ -115,7 +115,7 @@
     - cilium_restart_on_config_change | bool
 
 - name: Wait for Cilium to be running and ready
-  ansible.builtin.command: "{{ cilium_cli_bin_path }} status --wait --wait-duration 10m"
+  ansible.builtin.command: "{{ cilium_cli_bin_path }} status --wait --wait-duration {{ cilium_status_wait_duration }}"
   environment:
     KUBECONFIG: "{{ cilium_kubeconfig_path }}"
   changed_when: true
